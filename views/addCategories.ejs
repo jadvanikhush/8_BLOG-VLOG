@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Category</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 50%;
+      margin: 20px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    .input-group label {
+      display: block;
+      font-weight: bold;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+    .back-link {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .back-link a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Add Category</h1>
+    <!-- Form to add new category -->
+    <form action="/addcategory" method="POST">
+      <div class="input-group">
+        <label for="categoryName">Category Name:</label>
+        <input type="text" id="categoryName" name="name" required>
+      </div>
+      <button type="submit" class="btn">Add Category</button>
+    </form>
+
+    <!-- Link to go back to the categories page -->
+    <div class="back-link">
+      <a href="/allcategories">Back to All Categories</a>
+    </div>
+  </div>
+
+</body>
+</html>

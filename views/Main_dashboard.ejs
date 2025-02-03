@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Blog-Vlog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div>
+<!-- 1st Div: Header -->
+<%- include('./header.ejs') %>
+
+
+    <!-- 2nd Div: Sidebar + Admin Login -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+        <!-- Left: Dashboard Title -->
+        <h1>Dashboard</h1>
+
+        <!-- Right: Admin Login Button -->
+        <a href="/admin">
+            <button style="padding: 10px 15px; background-color: #333; color: white; border: none; cursor: pointer;">
+                Admin Login
+            </button>
+        </a>
+    </div>
+
+    <!-- 3rd Div: Search Bar -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <form id="searchForm" method="GET" action="/">
+            <input type="text" id="categorySearch" name="category" placeholder="Search by Category" style="padding: 10px; width: 300px;">
+            <button type="submit" style="padding: 10px 15px; background-color: #28a745; color: white; border: none; cursor: pointer;">
+                Search
+            </button>
+        </form>
+    </div>
+
+ 
+
+</div>
+
+</body>
+</html>
