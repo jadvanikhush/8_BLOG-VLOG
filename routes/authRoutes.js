@@ -3,6 +3,7 @@ const router = express.Router();
 const { registerAdmin, loginAdmin} = require('../controllers/authController');
 const { protectAdmin } = require('../middleware/authMiddleware');
 const adminRoutes = require('./adminRoutes');
+const Blog = require
 
 //firstly login the admin page
 

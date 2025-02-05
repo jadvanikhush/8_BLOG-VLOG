@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const mainRoutes = require('./routes/mainRoutes');
 const authRoutes = require('./routes/authRoutes');
 const path = require('path');
+
 const { logoutAdmin } = require('./controllers/authController')
 
 require('dotenv').config();

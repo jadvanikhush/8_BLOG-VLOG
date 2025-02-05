@@ -36,6 +36,21 @@
         </form>
     </div>
 
+    <!-- Blog Listings -->
+    <div style="max-width: 800px; margin: auto;">
+        <% if (blogs.length > 0) { %>
+            <% blogs.forEach(blog => { %>
+                <div style="border-bottom: 1px solid #ddd; padding: 15px;">
+                    <h2><a href="/blog/<%= blog.slug %>"><%= blog.title %></a></h2>
+                    <p><strong>Category:</strong> <%= blog.category %></p>
+                    <p><%= blog.description.substring(0, 150) %>...</p>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p style="text-align: center;">No blogs found.</p>
+        <% } %>
+    </div>
+
  
 
 </div>

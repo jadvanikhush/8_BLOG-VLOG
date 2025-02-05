@@ -26,6 +26,7 @@ const Blog = require('../models/Blog');
 exports.createBlog = async (req, res) => {
     const { title, category, description } = req.body;
   
+    console.log(req.body)
     try {
       // Create a new blog document
       const newBlog = new Blog({
@@ -38,9 +39,11 @@ exports.createBlog = async (req, res) => {
       await newBlog.save();
   
       // Redirect to a page that shows all blogs or a success page
-      res.redirect('/all-blogs');  // For example, redirect to all blogs page
+      res.redirect('/admin/dashboard/allBlogs');  // For example, redirect to all blogs page
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error adding blog');
+      // res.status(500).send('Error adding blog');
+      res.status(500).send({ error : error.message });
+
     }
 };

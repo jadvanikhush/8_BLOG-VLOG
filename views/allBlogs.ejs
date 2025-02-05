@@ -51,15 +51,19 @@
   </style>
 </head>
 <body>
-
+  
   <div class="container">
     <h1>All Blogs</h1>
-
+    <% console.log({blogs}) %>
+    
+    
     <!-- List of blogs -->
     <ul class="blog-list">
       <% blogs.forEach(function(blog) { %>
         <li class="blog-item">
-          <span><%= blog.name %></span>
+          <span><%= blog.title %></span>
+          <span><%= blog.category %></span>
+          <span><%= blog.description: %></span>
           <!-- Form to delete a blog -->
           <form action="/delete-blog/<%= blog._id %>" method="POST" style="display:inline;">
             <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this blog?')">Delete</button>
@@ -69,5 +73,7 @@
     </ul>
   </div>
 
+  <script> 
+  </script>
 </body>
 </html>

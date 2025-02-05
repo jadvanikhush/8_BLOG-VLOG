@@ -9,6 +9,48 @@ const {createCategory} = require('../controllers/categoryController');
 const { createBlog } = require( '../controllers/blogController')
 // const { logoutAdmin } = require('../controllers/authController')
 
+//allBlogs
+// Route to display all blogs
+router.get('/allBlogs', async (req, res) => {
+  try {
+    // Fetch all blogs from the database
+    const blogs = await Blog.find();  
+    res.render('allBlogs', { blogs });  // Render allBlogs.ejs with blogs data
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Route to delete a blog
+router.post('/delete-blog/:id', async (req, res) => {
+  const blogId = req.params.id;
+
+  try {
+    // Find the blog by ID and delete it
+    await Blog.findByIdAndDelete(blogId);
+    
+    // Redirect to the blogs list after deletion
+    res.redirect('/allblogs');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error deleting blog');
+  }
+});
+
+// -----------------------------------------------------------------------------------
+
+//addBlog
+// Route to show the Add Blog form
+router.get('/addBlog', (req, res) => {
+  res.render('addBlog');
+})
+
+// Route to handle form submission and save the blog to the database
+router.post('/addblog', createBlog);
+
+//-----------------------------------------------------------------------------------
+
 //allCategories
 // router.post('/allCategories', allCategories);
 
@@ -39,63 +81,18 @@ router.post('/delete-category/:id', async (req, res) => {
     }
   });
   
-
-
 // -----------------------------------------------------------------------------------
+
 //addCategories
 
 // Route to render the Add Category page (GET request)
-router.get('/addcategory', (req, res) => {
-    res.render('addcategory');  // Render the addcategory.ejs page
+router.get('/addCategories', (req, res) => {
+    res.render('addCategories');  // Render the addcategory.ejs page
   });  
 // Route to handle form submission (POST request)
-router.post('/addCategories', createCategory);
+router.post('addCategories', createCategory);
 
 
 // -----------------------------------------------------------------------------------
-//allBlogs
-// Route to display all blogs
-router.get('/allBlogs', async (req, res) => {
-  try {
-    // Fetch all blogs from the database
-    const blogs = await Blog.find();  
-    res.render('allBlogs', { blogs: blogs });  // Render allBlogs.ejs with blogs data
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
-
-// Route to delete a blog
-router.post('/delete-blog/:id', async (req, res) => {
-  const blogId = req.params.id;
-
-  try {
-    // Find the blog by ID and delete it
-    await Blog.findByIdAndDelete(blogId);
-    
-    // Redirect to the blogs list after deletion
-    res.redirect('/allblogs');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error deleting blog');
-  }
-});
-
-
-// -----------------------------------------------------------------------------------
-//addBlog
-// Route to show the Add Blog form
-router.get('/addBlog', (req, res) => {
-    res.render('addBlog');
-  })
-
-// Route to handle form submission and save the blog to the database
-router.post('/add-blog', createBlog);
-
-//-----------------------------------------------------------------------------------
-
-
-
 
 module.exports = router;
