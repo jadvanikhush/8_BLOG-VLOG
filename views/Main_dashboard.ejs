@@ -28,16 +28,20 @@
 
     <!-- 3rd Div: Search Bar -->
     <div style="text-align: center; margin-bottom: 20px;">
-        <form id="searchForm" method="GET" action="/">
+        <form id="searchForm" method="GET" action="/search-blogs">
+            <!-- Category search input -->
             <input type="text" id="categorySearch" name="category" placeholder="Search by Category" style="padding: 10px; width: 300px;">
+            
+            <!-- Submit button for search -->
             <button type="submit" style="padding: 10px 15px; background-color: #28a745; color: white; border: none; cursor: pointer;">
                 Search
             </button>
         </form>
     </div>
+   
 
     <!-- Blog Listings -->
-    <div style="max-width: 800px; margin: auto;">
+    <div id="search-results" style="max-width: 800px; margin: auto;">
         <% if (blogs.length > 0) { %>
             <% blogs.forEach(blog => { %>
                 <div style="border-bottom: 1px solid #ddd; padding: 15px;">

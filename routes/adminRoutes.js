@@ -22,32 +22,40 @@ router.get('/allBlogs', async (req, res) => {
   }
 });
 
-// Route to delete a blog
-router.post('/delete-blog/:id', async (req, res) => {
-  const blogId = req.params.id;
-
+// DELETE route for deleting a blog
+router.post("/delete-blog/:id", async (req, res) => {
   try {
-    // Find the blog by ID and delete it
-    await Blog.findByIdAndDelete(blogId);
-    
-    // Redirect to the blogs list after deletion
-    res.redirect('/allblogs');
+    const blogId = req.params.id;
+    await Blog.findByIdAndDelete(blogId); // Delete the blog from the database
+    res.redirect("/admin/dashboard/allblogs"); // Redirect to the blogs page
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error deleting blog');
+    res.status(500).send("Error deleting blog");
   }
 });
 
-// -----------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 
 //addBlog
 // Route to show the Add Blog form
-router.get('/addBlog', (req, res) => {
-  res.render('addBlog');
-})
+// router.get('/addBlog', (req, res) => {
+//   res.render('addBlog',{ categories });
+// })
+
+router.get('/add-blog', async (req, res) => {
+  try {
+    console.log('Fetching categories from the database...');
+    const categories = await Category.find();
+    console.log('Categories fetched:', categories);
+    res.render('addBlog', { categories });
+  } catch (err) {
+    console.error('Error while fetching categories:', err);
+    res.status(500).send('Error loading categories');
+  }
+});
 
 // Route to handle form submission and save the blog to the database
-router.post('/addblog', createBlog);
+router.post('/addblog' , createBlog);
 
 //-----------------------------------------------------------------------------------
 
@@ -90,7 +98,7 @@ router.get('/addCategories', (req, res) => {
     res.render('addCategories');  // Render the addcategory.ejs page
   });  
 // Route to handle form submission (POST request)
-router.post('addCategories', createCategory);
+router.post('/addCategories', createCategory);
 
 
 // -----------------------------------------------------------------------------------

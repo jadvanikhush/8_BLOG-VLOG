@@ -23,27 +23,40 @@ const Blog = require('../models/Blog');
 // };
 
 // Admin: Create a new blog
-exports.createBlog = async (req, res) => {
-    const { title, category, description } = req.body;
-  
-    console.log(req.body)
-    try {
-      // Create a new blog document
-      const newBlog = new Blog({
-        title,
-        category,
-        description
-      });
-  
-      // Save the blog to the database
-      await newBlog.save();
-  
-      // Redirect to a page that shows all blogs or a success page
-      res.redirect('/admin/dashboard/allBlogs');  // For example, redirect to all blogs page
-    } catch (error) {
-      console.error(error);
-      // res.status(500).send('Error adding blog');
-      res.status(500).send({ error : error.message });
+const slugify = require("slugify");
 
+exports.createBlog = async (req, res) => {
+  const { title, category, description } = req.body;
+
+  try {
+    if (!categories || categories.length === 0) {
+      return res.status(400).send('Please select at least one category');
     }
+
+    let slug = slugify(title, { lower: true, strict: true });
+
+    // Check if the slug already exists
+    let existingBlog = await Blog.findOne({ slug });
+    if (existingBlog) {
+      slug = `${slug}-${Date.now()}`; // Append timestamp to make the slug unique
+    }
+
+    // Create a new blog document
+    const newBlog = new Blog({
+      title,
+      category,
+      description,
+      slug,
+    });
+
+    // Save the blog to the database
+    await newBlog.save();
+
+    res.redirect("/admin/dashboard/allblogs");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error adding blog");
+  }
 };
+
+

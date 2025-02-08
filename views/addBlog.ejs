@@ -50,10 +50,10 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- <div class="container">
     <h1>Add Blog</h1>
 
-    <!-- Add Blog Form -->
+    Add Blog Form
     <form action="/admin/dashboard/addblog" method="POST">
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" required>
@@ -66,7 +66,57 @@
 
       <button type="submit">Add Blog</button>
     </form>
-  </div>
+  </div> -->
+
+  <body>
+    <div class="container">
+      <h1>Create a Blog</h1>
+  
+      <!-- Error message for validation -->
+      <div class="error-message" id="error-message" style="display: none;">
+        Please select at least one category to proceed.
+      </div>
+  
+      <!-- Blog creation form -->
+      <form id="blog-form" action="/admin/dashboard/addBlog" method="POST">
+        <!-- Blog Title -->
+        <div class="input-group">
+          <label for="title">Blog Title:</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+  
+        <!-- Blog Description -->
+        <div class="input-group">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+  
+        <!-- Category Selection -->
+        <div class="category-group">
+          <label for="categories">Select Categories:</label>
+          <% categories.forEach(function(category) { %>
+            <div>
+              <input type="checkbox" id="<%= category._id %>" name="categories" value="<%= category._id %>">
+              <label for="<%= category._id %>"><%= category.name %></label>
+            </div>
+          <% }); %>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn">Create Blog</button>
+      </form>
+    </div>
+  
+    <script>
+      document.getElementById('blog-form').addEventListener('submit', function (e) {
+        const categories = document.querySelectorAll('input[name="categories"]:checked');
+        if (categories.length === 0) {
+          e.preventDefault();
+          document.getElementById('error-message').style.display = 'block';
+        }
+      });
+    </script>
+  </body>
 
 </body>
 </html>
