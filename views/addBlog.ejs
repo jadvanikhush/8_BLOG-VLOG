@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
       margin: 0;
       padding: 0;
     }
+
     .container {
       width: 50%;
       margin: 50px auto;
@@ -19,21 +21,26 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     h1 {
       text-align: center;
       color: #333;
     }
+
     label {
       display: block;
       margin-bottom: 5px;
     }
-    input, textarea {
+
+    input,
+    textarea {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     button {
       width: 100%;
       padding: 10px;
@@ -43,18 +50,19 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #45a049;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- <div class="container">
+  <div class="container">
     <h1>Add Blog</h1>
 
-    Add Blog Form
-    <form action="/admin/dashboard/addblog" method="POST">
+    <form action="/admin/dashboard/addblog" method="POST" enctype="multipart/form-data">
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" required>
 
@@ -64,59 +72,53 @@
       <label for="description">Description:</label>
       <textarea id="description" name="description" rows="5" required></textarea>
 
-      <button type="submit">Add Blog</button>
-    </form>
-  </div> -->
+      <label for="image">Upload Image:</label>
+      <input type="file" id="image" name="image" accept="image/*" required>
+      
 
-  <body>
+      <button type="submit">Add Blog</button>
+
+    </form>
+  </div>
+
+  <!-- <body>
     <div class="container">
-      <h1>Create a Blog</h1>
-  
-      <!-- Error message for validation -->
-      <div class="error-message" id="error-message" style="display: none;">
+      <h1>Create a Blog</h1> -->
+
+  <!-- Error message for validation -->
+  <!-- <div class="error-message" id="error-message" style="display: none;">
         Please select at least one category to proceed.
-      </div>
-  
-      <!-- Blog creation form -->
-      <form id="blog-form" action="/admin/dashboard/addBlog" method="POST">
-        <!-- Blog Title -->
-        <div class="input-group">
+      </div> -->
+
+  <!-- Blog creation form -->
+  <!-- <form id="blog-form" action="/admin/dashboard/addBlog" method="POST"> -->
+  <!-- Blog Title -->
+  <!-- <div class="input-group">
           <label for="title">Blog Title:</label>
           <input type="text" id="title" name="title" required>
-        </div>
-  
-        <!-- Blog Description -->
-        <div class="input-group">
-          <label for="description">Description:</label>
+        </div> -->
+
+  <!-- Blog Description -->
+  <!-- <div class="input-group">
+          <label for="description">Blog Description:</label>
           <textarea id="description" name="description" rows="5" required></textarea>
-        </div>
-  
-        <!-- Category Selection -->
-        <div class="category-group">
-          <label for="categories">Select Categories:</label>
-          <% categories.forEach(function(category) { %>
-            <div>
-              <input type="checkbox" id="<%= category._id %>" name="categories" value="<%= category._id %>">
-              <label for="<%= category._id %>"><%= category.name %></label>
-            </div>
-          <% }); %>
-        </div>
-  
-        <!-- Submit Button -->
-        <button type="submit" class="btn">Create Blog</button>
+        </div> -->
+
+  <!-- Category Selection -->
+  <!-- <div class="input-group">
+          <label for="Category">Blog Category:</label>
+          <input type="text" id="Category" name="Category" required>
+        </div> -->
+
+
+  <!-- Submit Button -->
+  <!-- <button type="submit" class="btn">Create Blog</button>
       </form>
     </div>
-  
-    <script>
-      document.getElementById('blog-form').addEventListener('submit', function (e) {
-        const categories = document.querySelectorAll('input[name="categories"]:checked');
-        if (categories.length === 0) {
-          e.preventDefault();
-          document.getElementById('error-message').style.display = 'block';
-        }
-      });
-    </script>
-  </body>
+
+    
+  </body> -->
 
 </body>
+
 </html>

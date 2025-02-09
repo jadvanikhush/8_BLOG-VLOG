@@ -25,12 +25,19 @@ const Blog = require('../models/Blog');
 // Admin: Create a new blog
 const slugify = require("slugify");
 
+
 exports.createBlog = async (req, res) => {
   const { title, category, description } = req.body;
+  console.log( "req file:🔥" ,req.file)
+  console.log( "req body:🔥" ,req.body)
+  console.log(req.file.filename)
+
+  const imagePath = req.file ? req.file.path : null;
+  console.log({imagePath});
 
   try {
-    if (!categories || categories.length === 0) {
-      return res.status(400).send('Please select at least one category');
+    if (!category) {
+      return res.status(400).send('Please select a category.');
     }
 
     let slug = slugify(title, { lower: true, strict: true });
@@ -47,6 +54,7 @@ exports.createBlog = async (req, res) => {
       category,
       description,
       slug,
+      image: imagePath
     });
 
     // Save the blog to the database

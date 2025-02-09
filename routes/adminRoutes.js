@@ -9,6 +9,9 @@ const {createCategory} = require('../controllers/categoryController');
 const { createBlog } = require( '../controllers/blogController')
 // const { logoutAdmin } = require('../controllers/authController')
 
+const upload = require("../middleware/multer");
+
+
 //allBlogs
 // Route to display all blogs
 router.get('/allBlogs', async (req, res) => {
@@ -39,23 +42,37 @@ router.post("/delete-blog/:id", async (req, res) => {
 //addBlog
 // Route to show the Add Blog form
 // router.get('/addBlog', (req, res) => {
-//   res.render('addBlog',{ categories });
+//   res.render('addBlog');
 // })
 
-router.get('/add-blog', async (req, res) => {
+// Render Add Blog page
+router.get('/addBlog', async (req, res) => {
   try {
-    console.log('Fetching categories from the database...');
+    // Fetch all categories from the database
     const categories = await Category.find();
-    console.log('Categories fetched:', categories);
+    // Render the 'addBlog' view, passing the categories to the template
     res.render('addBlog', { categories });
   } catch (err) {
-    console.error('Error while fetching categories:', err);
-    res.status(500).send('Error loading categories');
+    console.error('Error fetching categories:', err);
+    res.status(500).send('Server Error');
   }
 });
 
+// router.get('/add-blog', async (req, res) => {
+  
+//   // try {
+//   //   console.log('Fetching categories from the database...');
+//   //   const categories = await Category.find();
+//   //   console.log('Categories fetched:', categories);
+//   //   res.render('addBlog', { categories });
+//   // } catch (err) {
+//   //   console.error('Error while fetching categories:', err);
+//   //   res.status(500).send('Error loading categories');
+//   // }
+// });
+
 // Route to handle form submission and save the blog to the database
-router.post('/addblog' , createBlog);
+router.post('/addblog', upload.single('image'), createBlog);
 
 //-----------------------------------------------------------------------------------
 
@@ -102,5 +119,6 @@ router.post('/addCategories', createCategory);
 
 
 // -----------------------------------------------------------------------------------
+
 
 module.exports = router;
